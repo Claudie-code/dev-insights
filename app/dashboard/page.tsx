@@ -8,6 +8,7 @@ import { LogoutButton } from "./LogoutButton";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { DashboardCharts } from "./DashboardCharts";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -51,6 +52,7 @@ export default async function DashboardPage() {
       </header>
 
       <section className="max-w-7xl mx-auto px-6 py-10 grid gap-8 md:grid-cols-[300px_1fr]">
+        {/* Colonne gauche */}
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -71,15 +73,26 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Dépôts GitHub</CardTitle>
-          </CardHeader>
-          <Separator />
-          <CardContent>
-            <RepoList repos={repos} />
-          </CardContent>
-        </Card>
+        {/* Colonne droite */}
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Dépôts GitHub</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <RepoList repos={repos} />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Analytics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <DashboardCharts repos={repos} />
+            </CardContent>
+          </Card>
+        </div>
       </section>
     </main>
   );
