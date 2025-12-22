@@ -9,6 +9,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { DashboardCharts } from "./DashboardCharts";
+import { GithubRepo } from "@/types/github";
+import { fetchRepos } from "@/lib/github/fetchRepos";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -33,14 +35,12 @@ export default async function DashboardPage() {
     );
   }
 
-  const res = await fetch("https://api.github.com/user/repos", {
-    headers: {
-      Authorization: `Bearer ${session.accessToken}`,
-      Accept: "application/vnd.github+json",
-    },
-    cache: "no-store",
-  });
-  const repos = res.ok ? await res.json() : [];
+  const repos: GithubRepo[] = await fetchRepos(session.accessToken);
+
+  if (!repos.length) {
+    return <p>Aucun dépôt disponible pour le moment.</p>;
+  }
+  console.log("Repos fetched:", repos);
 
   return (
     <main className="min-h-screen bg-background">
@@ -84,14 +84,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Analytics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <DashboardCharts repos={repos} />
-            </CardContent>
-          </Card>
+          <DashboardCharts repos={repos} />
         </div>
       </section>
     </main>
