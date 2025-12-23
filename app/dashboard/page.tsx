@@ -7,10 +7,10 @@ import { Stats } from "./Stats";
 import { LogoutButton } from "./LogoutButton";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { DashboardCharts } from "./DashboardCharts";
 import { GithubRepo } from "@/types/github";
 import { fetchRepos } from "@/lib/github/fetchRepos";
+import { IAAnalysisCard } from "./IAAnalysisCard";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -40,7 +40,6 @@ export default async function DashboardPage() {
   if (!repos.length) {
     return <p>Aucun dépôt disponible pour le moment.</p>;
   }
-  console.log("Repos fetched:", repos);
 
   return (
     <main className="min-h-screen bg-background">
@@ -75,6 +74,8 @@ export default async function DashboardPage() {
 
         {/* Colonne droite */}
         <div className="space-y-6">
+          <IAAnalysisCard repos={repos} />
+
           <Card>
             <CardHeader>
               <CardTitle>Dépôts GitHub</CardTitle>
