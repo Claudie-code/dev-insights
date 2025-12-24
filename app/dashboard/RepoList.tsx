@@ -2,8 +2,9 @@
 
 import { ExternalLink, Star, AlertCircle } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { GithubRepoApi } from "@/lib/github/fetchRepos";
 
-export function RepoList({ repos }: { repos: any[] }) {
+export function RepoList({ repos }: { repos: GithubRepoApi[] }) {
   return (
     <ScrollArea className="h-[60vh]">
       {repos.length === 0 ? (

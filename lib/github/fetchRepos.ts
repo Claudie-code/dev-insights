@@ -1,6 +1,6 @@
 import { GithubRepo } from "@/types/github";
 
-type GithubRepoApi = {
+export type GithubRepoApi = {
   id: number;
   name: string;
   html_url: string;

@@ -1,8 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { Account, Profile, User } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
-import { profile } from "console";
 
 export const authOptions = {
   providers: [
@@ -20,9 +19,9 @@ export const authOptions = {
       profile,
     }: {
       token: JWT;
-      account?: any;
-      profile?: any;
-      user?: any;
+      account: Account | null;
+      user?: User;
+      profile?: Profile;
     }) {
       if (account && account.access_token) {
         token.accessToken = account.access_token;
