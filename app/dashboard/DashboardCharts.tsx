@@ -13,6 +13,7 @@ import {
 import { Bar, Doughnut } from "react-chartjs-2";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code, GitCommit } from "lucide-react";
+import { GithubRepo } from "@/types/github";
 
 // Enregistrer les composants Chart.js
 ChartJS.register(
@@ -25,7 +26,7 @@ ChartJS.register(
   Legend
 );
 
-export function DashboardCharts({ repos }: { repos: any[] }) {
+export function DashboardCharts({ repos }: { repos: GithubRepo[] }) {
   // 🔹 Top 5 repos par commits (on utilise 'size' comme proxy si commits non disponibles)
   const topReposByCommits = [...repos]
     .sort((a, b) => (b.size || 0) - (a.size || 0))

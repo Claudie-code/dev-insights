@@ -1,6 +1,6 @@
-import { BarChart3 } from "lucide-react";
+import { GithubRepo } from "@/types/github";
 
-export function Stats({ repos }: { repos: any[] }) {
+export function Stats({ repos }: { repos: GithubRepo[] }) {
   const totalStars = repos.reduce(
     (acc, repo) => acc + repo.stargazers_count,
     0
