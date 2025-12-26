@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken as string | undefined;
-  console.log("session", session);
   if (!accessToken) return NextResponse.json([], { status: 401 });
 
   const res = await fetch("https://api.github.com/user/repos", {
