@@ -23,7 +23,7 @@
 
 ## Tech Stack
 
-- **Frontend & Backend** : Next.js 16 + React 19 + TypeScript
+- **Frontend & Backend** : Next.js 15 + React 18 + TypeScript
 - **Authentification** : NextAuth avec GitHub OAuth
 - **Graphiques** : Chart.js / react-chartjs-2
 - **UI Components** : Radix UI, Tailwind CSS
