@@ -4,6 +4,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { Hero } from "@/components/Hero";
 import Features from "@/components/Features";
 import { HowItWorks } from "@/components/HowItWorks";
+import { CTA } from "@/components/CTA";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -13,6 +14,7 @@ export default async function Home() {
       <Hero session={!!session} />
       <HowItWorks />
       <Features />
+      <CTA session={!!session} />
     </HomeLayout>
   );
 }

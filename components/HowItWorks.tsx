@@ -3,7 +3,7 @@ import { HowItWorksStep } from "./HowItWorksStep";
 
 export function HowItWorks() {
   return (
-    <section className="w-full py-8 sm:py-16 lg:py-24">
+    <section className="w-full py-8 sm:py-16 lg:py-24 bg-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-20">
