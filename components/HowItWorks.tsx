@@ -1,9 +1,9 @@
-import { GithubIcon, BarChart3Icon, SparklesIcon, Github } from "lucide-react";
+import { BarChart3Icon, SparklesIcon, Github } from "lucide-react";
 import { HowItWorksStep } from "./HowItWorksStep";
 
 export function HowItWorks() {
   return (
-    <section className="w-full py-8 sm:py-16 lg:py-24 bg-white">
+    <section className="w-full py-8 sm:py-16 lg:py-24 bg-gradient-to-b from-background to-mute/20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-20">
