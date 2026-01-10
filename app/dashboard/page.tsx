@@ -50,43 +50,87 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <section className="max-w-7xl mx-auto px-6 py-10 grid gap-8 md:grid-cols-[300px_1fr]">
-        {/* Colonne gauche */}
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Profil</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <UserInfo session={session} />
-            </CardContent>
-          </Card>
+      <section className="max-w-7xl mx-auto px-6 py-10 grid gap-6 grid-cols-1 md:grid-cols-4">
+        <IAAnalysisCard repos={repos} />
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Statistiques</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Stats repos={repos} />
-            </CardContent>
-          </Card>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Profil</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <UserInfo session={session} />
+          </CardContent>
+        </Card>
 
-        {/* Colonne droite */}
-        <div className="space-y-6">
-          <IAAnalysisCard repos={repos} />
+        <Card>
+          <CardHeader>
+            <CardTitle>Statistiques</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Stats repos={repos} />
+          </CardContent>
+        </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Dépôts GitHub</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <RepoList repos={repos} />
-            </CardContent>
-          </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Langages principaux</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              {Object.entries(
+                repos.reduce<Record<string, number>>((acc, r) => {
+                  if (r.language) acc[r.language] = (acc[r.language] || 0) + 1;
+                  return acc;
+                }, {})
+              )
+                .slice(0, 3)
+                .map(([lang, count]) => (
+                  <li key={lang} className="flex justify-between">
+                    <span>{lang}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {count}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </CardContent>
+        </Card>
 
-          <DashboardCharts repos={repos} />
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Derniers repos mis à jour</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-1 max-h-40 overflow-y-auto">
+              {repos
+                .sort(
+                  (a, b) =>
+                    new Date(b.pushed_at).getTime() -
+                    new Date(a.pushed_at).getTime()
+                ) // Trie par date de dernière mise à jour
+                .slice(0, 3)
+                .map((repo) => (
+                  <li key={repo.id} className="flex justify-between">
+                    <span>{repo.name}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {new Date(repo.pushed_at).toLocaleDateString()}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="md:col-span-2">
+          <CardHeader>
+            <CardTitle>Dépôts GitHub</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RepoList repos={repos} />
+          </CardContent>
+        </Card>
+
+        <DashboardCharts repos={repos} />
       </section>
     </main>
   );

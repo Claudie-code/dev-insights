@@ -10,10 +10,8 @@ export function LogoutButton() {
       variant="destructive"
       size="sm"
       onClick={() => signOut({ callbackUrl: "/login" })}
-      className="flex items-center gap-2"
     >
       <LogOut size={16} />
-      Se déconnecter
     </Button>
   );
 }

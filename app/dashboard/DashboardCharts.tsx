@@ -11,7 +11,13 @@ import {
   ArcElement,
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Code, GitCommit } from "lucide-react";
 import { GithubRepo } from "@/types/github";
 
@@ -69,21 +75,9 @@ export function DashboardCharts({ repos }: { repos: GithubRepo[] }) {
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-6 mt-6">
-      {/* Top 5 commits */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <GitCommit className="w-5 h-5" /> Top 5 repos par commits
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Bar data={commitsData} />
-        </CardContent>
-      </Card>
-
+    <>
       {/* Langages utilisés */}
-      <Card>
+      <Card className="md:col-span-2">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Code className="w-5 h-5" /> Répartition des langages
@@ -93,6 +87,18 @@ export function DashboardCharts({ repos }: { repos: GithubRepo[] }) {
           <Doughnut data={languageData} />
         </CardContent>
       </Card>
-    </div>
+      {/* Top 5 commits */}
+      <Card className="md:col-span-4">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <GitCommit className="w-5 h-5" /> Top 5 repos par commits
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription></CardDescription>
+          <Bar data={commitsData} />
+        </CardContent>
+      </Card>
+    </>
   );
 }

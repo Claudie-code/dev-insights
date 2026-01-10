@@ -12,10 +12,19 @@ export function Stats({ repos }: { repos: GithubRepo[] }) {
 
   return (
     <div className="space-y-1">
-      <ul className="text-sm space-y-1 text-muted-foreground">
-        <li>Total dépôts : {repos.length}</li>
-        <li>Total étoiles : {totalStars}</li>
-        <li>Issues ouvertes : {totalIssues}</li>
+      <ul className="space-y-1">
+        <li className="flex justify-between">
+          <span>Total dépôts</span>{" "}
+          <span className="text-sm text-muted-foreground">{repos.length}</span>
+        </li>
+        <li className="flex justify-between">
+          <span>Total étoiles</span>{" "}
+          <span className="text-sm text-muted-foreground">{totalStars}</span>
+        </li>
+        <li className="flex justify-between">
+          <span>Issues ouvertes</span>{" "}
+          <span className="text-sm text-muted-foreground">{totalIssues}</span>
+        </li>
       </ul>
     </div>
   );
